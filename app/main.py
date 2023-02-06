@@ -2,9 +2,12 @@ from flask import Flask, redirect, render_template
 import firebase_admin
 from firebase_admin import db
 import os
+from dotenv import dotenv_values
+
+config = dotenv_values(".env")
 
 # gives our pythong application access to our db
-cred_obj = firebase_admin.credentials.Certificate('./ServiceAccountKey.json')
+cred_obj = firebase_admin.credentials.Certificate(config.SERVICE_ACCOUNT_KEY)
 # have access to my database
 default_app = firebase_admin.initialize_app(cred_obj, {
     'databaseURL': 'https://shrink-the-link-default-rtdb.firebaseio.com/'
